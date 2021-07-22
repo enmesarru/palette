@@ -1,0 +1,68 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  background: #111827;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.container__sidebar {
+  width: 20%;
+  background: #86efac;
+}
+
+.container__content {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start; /* override gap between rows */
+  justify-content: space-between;
+}
+
+.container__content::after {
+  content: "";
+  flex: auto;
+}
+
+.box {
+  width: 2em;
+  min-height: 2em;
+  margin: 1px;
+  border: 1px solid lawngreen;
+  cursor: pointer;
+  padding: 0.5em;
+}
+
+.sketch-picker {
+  width: auto !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4285F4 #F5F5F5;
+}
+
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #4285F4;
+  border-radius: 20px;
+  border: 3px solid #F5F5F5;
+}
