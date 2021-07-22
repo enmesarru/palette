@@ -50,11 +50,11 @@ const ColorBox = forwardRef(
 export default DropTarget(
   ItemType,
   {
-    hover(props, monitor, component) {
+    drop(props, monitor, component) {
       if (!component) {
         return null;
       }
-      const node = component.getNode();
+      const node = component.decoratedRef.current.getNode();
       if (!node) {
         return null;
       }
@@ -65,23 +65,7 @@ export default DropTarget(
       if (dragIndex === hoverIndex) {
         return;
       }
-      // Determine rectangle on screen
-      const hoverBoundingRect = node.getBoundingClientRect();
-      // Get vertical middle
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
-      // Get pixels to the top
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-    
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
+
       props.populateColor(dragIndex, hoverIndex);
       monitor.getItem().index = hoverIndex;
     },
