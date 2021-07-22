@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import { selectPalette } from './features/color/colorSlice';
 
 import ColorBox from './features/color/ColorBox';
-import Picker from './Picker';
+import Picker from './features/sidebar/Picker';
 import './App.css'
+import GridGenerator from './features/sidebar/GridGenerator';
 
 function App() {
   const palette = useSelector(selectPalette)
@@ -12,12 +13,13 @@ function App() {
   return (
     <div className="container">
       <div className="container__content">
-        {Array(2).fill(0).map((a, i) => {
+        {palette.map((a, i) => {
           return <ColorBox val={i} key={i}/>
         })}
       </div>
       <div className="container__sidebar">
         <Picker />
+        <GridGenerator />
       </div>
     </div>
   );
