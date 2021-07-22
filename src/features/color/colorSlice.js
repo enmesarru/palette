@@ -19,11 +19,17 @@ export const colorSlice = createSlice({
     changeBoxColor(state, action) {
       const {id} = action.payload
       state.palette[state.palette.findIndex(x => x.id === id)].color = state.pickedColor.hex
+    },
+    iterateColor(state, action) {
+      const {from, to} = action.payload
+      state.palette.forEach(x => {
+        if(from <= x.name && x.name <= to) x.color = "#efefef"
+      })
     }
   },
 });
 
-export const { setPickedColor, generateBox, changeBoxColor } = colorSlice.actions
+export const { setPickedColor, generateBox, changeBoxColor, iterateColor } = colorSlice.actions
 
 export const selectPalette = (state) => state.color.palette
 export const selectPickedColor = (state) => state.color.pickedColor

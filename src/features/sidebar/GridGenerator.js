@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { generateBox } from "../color/colorSlice";
 
 export default function GridGenerator() {
-  const [boxCount, setBoxCount] = useState(10)
+  const [boxCount, setBoxCount] = useState(2)
   const dispatch = useDispatch()
 
   const onBoxCountChange = (e) => {
