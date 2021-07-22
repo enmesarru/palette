@@ -14,12 +14,16 @@ export const colorSlice = createSlice({
       state.pickedColor = action.payload;
     },
     generateBox: (state, action) => {
-      state.palette = Array(action.payload).fill(0).map((v, index) => ({id: uuidv4(), name: index }))
+      state.palette = Array(action.payload).fill(0).map((v, index) => ({id: uuidv4(), name: index, color: '' }))
+    },
+    changeBoxColor(state, action) {
+      const {id} = action.payload
+      state.palette[state.palette.findIndex(x => x.id === id)].color = state.pickedColor.hex
     }
   },
 });
 
-export const { setPickedColor, generateBox } = colorSlice.actions
+export const { setPickedColor, generateBox, changeBoxColor } = colorSlice.actions
 
 export const selectPalette = (state) => state.color.palette
 export const selectPickedColor = (state) => state.color.pickedColor

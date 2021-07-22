@@ -28,6 +28,7 @@ body {
   align-items: center;
   align-content: flex-start; /* override gap between rows */
   justify-content: space-between;
+  padding: 5%;
 }
 
 .container__content::after {
@@ -42,6 +43,8 @@ body {
   border: 1px solid lawngreen;
   cursor: pointer;
   padding: 0.5em;
+  text-align: center;
+  line-height: 2em;
 }
 
 .sketch-picker {

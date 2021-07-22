@@ -14,7 +14,7 @@ function App() {
     <div className="container">
       <div className="container__content">
         {palette.map((a, i) => {
-          return <ColorBox val={i} key={i}/>
+          return <ColorBox box={a} key={a.id}/>
         })}
       </div>
       <div className="container__sidebar">
