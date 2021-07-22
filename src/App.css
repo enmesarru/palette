@@ -16,7 +16,8 @@ body {
 }
 
 .container__sidebar {
-  width: 20%;
+  width: calc(20% - 20px);
+  padding: 20px;
   background: #86efac;
 }
 
@@ -45,6 +46,8 @@ body {
   padding: 0.5em;
   text-align: center;
   line-height: 2em;
+  user-select: "none";
+  transition: "border-color 0.5s";
 }
 
 .sketch-picker {

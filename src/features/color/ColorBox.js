@@ -26,15 +26,24 @@ const ColorBox = forwardRef(
       getNode: () => elementRef.current,
     }));
 
+    function contextMenuHandler(e) {
+      e.preventDefault();
+    }
+  
+    React.useEffect(() => {
+      elementRef.current.addEventListener('contextmenu', contextMenuHandler)
+      return () => {
+        elementRef.current.removeEventListener("contextmenu", contextMenuHandler);
+      }
+    }, [])
+
     const applyColor = () => dispatch(changeBoxColor({ id }));
     return (
       <div
         className="box"
         style={{
-          transition: "border-color 0.5s",
           opacity: isDragging ? 0.2 : 1,
           borderColor: isOver ? "#F5A623" : "",
-          userSelect: "none",
           backgroundColor: color,
         }}
         key={id}
