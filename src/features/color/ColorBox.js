@@ -30,7 +30,7 @@ const ColorBox = forwardRef(
       e.preventDefault();
     }
   
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       elementRef.current.addEventListener('contextmenu', contextMenuHandler)
       return () => {
         elementRef.current.removeEventListener("contextmenu", contextMenuHandler);
