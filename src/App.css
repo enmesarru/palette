@@ -31,9 +31,8 @@ body {
   padding: 5%;
 }
 
-.container__content::after {
-  content: "";
-  flex: auto;
+.container__content > .box {
+  flex: 1 0 auto;
 }
 
 .box {

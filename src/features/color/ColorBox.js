@@ -17,7 +17,7 @@ const ColorBox = forwardRef(
     ref
   ) => {
     const dispatch = useDispatch();
-
+    
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
@@ -56,7 +56,7 @@ const ColorBox = forwardRef(
   }
 );
 
-export default DropTarget(
+const DndBox = DropTarget(
   ItemType,
   {
     drop(props, monitor, component) {
@@ -98,3 +98,8 @@ export default DropTarget(
     })
   )(ColorBox)
 );
+
+
+export default React.memo(DndBox, (prev, next) => {
+  return prev.box.color === next.box.color
+});
