@@ -45,12 +45,12 @@ const ColorBox = forwardRef(
           opacity: isDragging ? 0.2 : 1,
           borderColor: isOver ? "#F5A623" : "",
           backgroundColor: color,
+          border: `1px solid ${!color ? "gray": "transparent"}`
         }}
         key={id}
         onDoubleClick={applyColor}
         ref={elementRef}
       >
-        {name}
       </div>
     );
   }

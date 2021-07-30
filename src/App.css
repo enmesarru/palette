@@ -27,19 +27,13 @@ body {
   flex-wrap: wrap;
   align-items: center;
   align-content: flex-start; /* override gap between rows */
-  justify-content: space-between;
   padding: 5%;
-}
-
-.container__content > .box {
-  flex: 1 0 auto;
 }
 
 .box {
   width: 2em;
   min-height: 2em;
   margin: 1px;
-  border: 1px solid lawngreen;
   cursor: pointer;
   padding: 0.5em;
   text-align: center;
