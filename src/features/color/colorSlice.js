@@ -5,6 +5,10 @@ import { v4 as uuidv4 } from "uuid";
 const initialState = {
   palette: [],
   pickedColor: "",
+  options: {
+    interpolationMode: "lch",
+    gamma: 1.0
+  }
 };
 
 export const colorSlice = createSlice({
@@ -24,6 +28,9 @@ export const colorSlice = createSlice({
       state.palette[state.palette.findIndex((x) => x.id === id)].color =
         state.pickedColor.hex;
     },
+    setOptions(state, action) {
+      state.options[action.payload.key] =  action.payload.value 
+    },
     iterateColor(state, action) {
       const { from, to } = action.payload;
 
@@ -33,7 +40,8 @@ export const colorSlice = createSlice({
       if (!!(startTone && endTone)) {
         const colors = chroma
           .scale([startTone, endTone])
-          .mode("lch")
+          .mode(state.options.interpolationMode)
+          .gamma(state.options.gamma)
           .colors(Math.abs(from - to));
 
         let count = 0;
@@ -48,7 +56,7 @@ export const colorSlice = createSlice({
   },
 });
 
-export const { setPickedColor, generateBox, changeBoxColor, iterateColor } =
+export const { setPickedColor, generateBox, changeBoxColor, iterateColor, setOptions } =
   colorSlice.actions;
 
 export const selectPalette = (state) => state.color.palette;
