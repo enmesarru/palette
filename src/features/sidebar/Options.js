@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { interpolationModes } from "../../constant";
 import {
   generateBox,
-  setInterpolationMode,
+  selectOptions,
   setOptions,
 } from "../color/colorSlice";
 
 const optionStyle = { display: "flex", justifyContent: "space-around", padding: 10 }
 
-export default function GridGenerator() {
+export default function Options() {
   const [boxCount, setBoxCount] = useState(2);
   const dispatch = useDispatch();
+  const options = useSelector(selectOptions)
 
   const onBoxCountChange = (e) => {
     setBoxCount(parseInt(e.target.value));
@@ -24,6 +25,7 @@ export default function GridGenerator() {
   const onGammaChange = (e) => {
     dispatch(setOptions({ key: "gamma", value: e.target.value }));
   };
+
   return (
     <div>
       <div
@@ -43,14 +45,14 @@ export default function GridGenerator() {
       </div>
       <div style={optionStyle}>
         <span>Interpolation Mode</span>
-        <select onChange={onInterpolationModeChange}>
+        <select onChange={onInterpolationModeChange} defaultValue={options.interpolationMode}>
           {interpolationModes.map((mode, index) => (
             <option key={`${index}_mode`}>{mode}</option>
           ))}
         </select>
       </div>
       <div style={optionStyle}>
-        <span>Gamma</span>
+        <span>Gamma: ({options.gamma})</span>
         <input
           type="range"
           min="0"

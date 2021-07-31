@@ -7,8 +7,9 @@ const initialState = {
   pickedColor: "",
   options: {
     interpolationMode: "lch",
-    gamma: 1.0
-  }
+    gamma: 1.0,
+  },
+  colorGroups: [],
 };
 
 export const colorSlice = createSlice({
@@ -23,13 +24,17 @@ export const colorSlice = createSlice({
         .fill(0)
         .map((v, index) => ({ id: uuidv4(), name: index, color: "" }));
     },
+    selectColor(state, action) {
+      debugger
+      state.colorGroups.push(action.payload);
+    },
     changeBoxColor(state, action) {
       const { id } = action.payload;
       state.palette[state.palette.findIndex((x) => x.id === id)].color =
         state.pickedColor.hex;
     },
     setOptions(state, action) {
-      state.options[action.payload.key] =  action.payload.value 
+      state.options[action.payload.key] = action.payload.value;
     },
     iterateColor(state, action) {
       const { from, to } = action.payload;
@@ -56,10 +61,18 @@ export const colorSlice = createSlice({
   },
 });
 
-export const { setPickedColor, generateBox, changeBoxColor, iterateColor, setOptions } =
-  colorSlice.actions;
+export const {
+  setPickedColor,
+  generateBox,
+  changeBoxColor,
+  iterateColor,
+  setOptions,
+  selectColor,
+} = colorSlice.actions;
 
 export const selectPalette = (state) => state.color.palette;
 export const selectPickedColor = (state) => state.color.pickedColor;
+export const selectOptions = (state) => state.color.options;
+export const selectColorGroups = (state) => state.color.colorGroups;
 
 export default colorSlice.reducer;

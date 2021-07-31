@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import { DragSource, DropTarget } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { changeBoxColor } from "./colorSlice";
+import { changeBoxColor, selectColor } from "./colorSlice";
 
 const ItemType = "BOX";
 
@@ -27,15 +27,17 @@ const ColorBox = forwardRef(
     }));
 
     function contextMenuHandler(e) {
+      dispatch(selectColor(color))
       e.preventDefault();
     }
   
     React.useLayoutEffect(() => {
       elementRef.current.addEventListener('contextmenu', contextMenuHandler)
+      let temp = elementRef.current
       return () => {
-        elementRef.current.removeEventListener("contextmenu", contextMenuHandler);
+        temp.removeEventListener("contextmenu", contextMenuHandler);
       }
-    }, [])
+    }, [color, contextMenuHandler])
 
     const applyColor = () => dispatch(changeBoxColor({ id }));
     return (
